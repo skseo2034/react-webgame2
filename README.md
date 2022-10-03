@@ -32,3 +32,41 @@ class LikeButton extends React.Component { // LikeButton 컴포넌트
     }
   }
 ```
+
+### 참고사항.
+    - 리액트문법 작성시 리액트 컴포넌트는 대문자로 해야하고, 기존 html 은 소문자로 해야 한다.
+      그리고 html 은 반드시 /> 닫아 줘야 한다. jsx 가 xml 이라 문법이 엄격함.
+    - javascript 부분은 중괄호({) 로 감싸 줘야 한다.
+    - jsx 문법안에서는 if 문과 for 사용불가 따라서 삼항연산자 또는 map 함수 사용
+        - 코드 예시
+            <button onClick={() => this.setState({liked: true})}>
+                { this.state.liked ? 'Liked' : 'Like!'}
+                {[1, 2, 3].map((i) => {
+                    return <div>i</div>
+                })}
+            </button>
+    - return 에는 태그 하나만 와야 한다.
+        - 코드 예시
+            return (
+                <div> // 태그 하나만 와야 해서 div 로 감쌌다.
+                    <button onClick={() => this.setState({liked: true})}>
+                    {this.state.liked ? 'Liked' : 'Like!'}
+                    {[1, 2, 3].map((i) => {
+                    return <div>i</div>
+                    })}
+                    </button>
+                    <input type="text"/>
+                </div>
+            )
+
+            return (
+            <> // <div></div> 대신 가짜 태그 fragement 도 가능하다.
+                <button onClick={() => this.setState({liked: true})}>
+                {this.state.liked ? 'Liked' : 'Like!'}
+                {[1, 2, 3].map((i) => {
+                return <div>i</div>
+                })}
+                </button>
+                <input type="text"/>
+            </>
+            )
