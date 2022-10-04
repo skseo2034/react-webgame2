@@ -70,3 +70,4 @@ class LikeButton extends React.Component { // LikeButton 컴포넌트
                 <input type="text"/>
             </>
             )
+    - 리액트에서 객체(배열, function 등)를 함부로 바꾸지마라, 복사해라(불변성)
