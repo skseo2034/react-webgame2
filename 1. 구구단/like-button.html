@@ -15,7 +15,7 @@
 
     const e = React.createElement;
 
-    class LikeButton extends React.Component {
+    /*class LikeButton extends React.Component {
         constructor(props) {
             super(props);
             this.state = {liked: false};
@@ -31,13 +31,30 @@
                 <div>
                     <button onClick={() => this.setState({liked: true})}>
                         {this.state.liked ? 'Liked' : 'Like!'}
-                         {/*[1, 2, 3].map((i) => {
+                         {/!*[1, 2, 3].map((i) => {
                            // return <div>i</div>
-                        })*/}
+                        })*!/}
                     </button>
                 </div>
             );
         }
+    }*/
+
+    const LikeButton = () => { // 함수형 컴포넌트가 아니고 함수 컴포넌드이다.
+        const [liked, setLiked] = React.useState(false); // 구조분해
+        // 뭔짓을 하던, 결국 return 한게 화면 이다.
+        if (liked) {
+            return 'You liked this';
+        }
+
+        const onButtonClick = () => {
+            setLiked(true);
+        }
+
+       /* <button onClick={() => setState({liked: true})}>Like</button>*/
+         return (
+             <button onClick={onButtonClick}>Like</button>
+         );
     }
 
     // ReactDOM.render(<LikeButton />, document.querySelector('#root')); // React 17 문법
