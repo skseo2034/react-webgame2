@@ -1,67 +1,56 @@
 <html>
-<head>
-    <meta charset="utf-8">
-    <title>웹게임</title>
-</head>
-<body>
-<div id="root"></div>
-<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-<!--<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>-->
-<!--<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>-->
-<script src=" https://unpkg.com/@babel/standalone/babel.min.js"></script>
-<script type="text/babel">
-    'use strict';
+    <head>
+        <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+        <!--<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>-->
+        <!--<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>-->
+        <script src=" https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <meta charset="utf-8">
+        <title>웹게임</title>
+    </head>
+        <body>
+            <div id="root"></div>
 
-    const e = React.createElement;
+            <script type="text/babel">
+                const GuGuDan = () => {
+                    const[first, setFirst] = React.useState(Math.ceil(Math.random() * 9));
+                    const[second, setSecond] = React.useState(Math.ceil(Math.random() * 9));
+                    const[value, setValue] = React.useState('');
+                    const[result, setResult] = React.useState('');
 
-    /*class LikeButton extends React.Component {
-        constructor(props) {
-            super(props);
-            this.state = {liked: false};
-        }
+                    const inputAnswer = (event) => {
+                        setValue(event.target.value);
+                    }
 
-        render() {
-            if (this.state.liked) {
-                return 'You liked this.';
-            }
+                    const resultCheck = () => {
+                        if ((first * second) == value) {
+                            setResult('띵동댕');
+                        } else {
+                            setResult('땡!!!');
+                        }
+                    }
 
-            // return e('button', {onClick: () => this.setState({liked: true})}, 'Like');r
-            return (
-                <div>
-                    <button onClick={() => this.setState({liked: true})}>
-                        {this.state.liked ? 'Liked' : 'Like!'}
-                         {/!*[1, 2, 3].map((i) => {
-                           // return <div>i</div>
-                        })*!/}
-                    </button>
-                </div>
-            );
-        }
-    }*/
+                    return (
+                            <div>
+                                <div>{first} 곱하기 {second}는?</div>
 
-    const LikeButton = () => { // 함수형 컴포넌트가 아니고 함수 컴포넌드이다.
-        const [liked, setLiked] = React.useState(false); // 구조분해
-        // 뭔짓을 하던, 결국 return 한게 화면 이다.
-        if (liked) {
-            return 'You liked this';
-        }
+                                <form>
+                                    <input type="number" value={value} onChange={inputAnswer} />
+                                    <button onClick={resultCheck}>입력!</button>
+                                </form>
 
-        const onButtonClick = () => {
-            setLiked(true);
-        }
+                                <div>{result}</div>
+                            </div>
+                    );
+                }
+              /*  const root = ReactDOM.createRoot(document.getElementById('root'));
+                root.render(
+                   <GuGuDan/>
+                );*/
 
-       /* <button onClick={() => setState({liked: true})}>Like</button>*/
-         return (
-             <button onClick={onButtonClick}>Like</button>
-         );
-    }
+                const root = document.querySelector("#root");
 
-    // ReactDOM.render(<LikeButton />, document.querySelector('#root')); // React 17 문법
-    ReactDOM.createRoot(document.querySelector('#root')).render(
-        <LikeButton/>
-    ); // React 18 문법
-
-</script>
-</body>
+                ReactDOM.render(<GuGuDan />, root);
+            </script>
+    </body>
 </html>
