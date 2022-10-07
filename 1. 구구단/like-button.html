@@ -22,21 +22,27 @@
                         setValue(event.target.value);
                     }
 
-                    const resultCheck = () => {
+                    const resultCheck = (e) => {
+                        e.preventDefault();
                         if ((first * second) == value) {
-                            setResult('띵동댕');
+                            setResult(value + ' 정답');
                         } else {
-                            setResult('땡!!!');
+                            setResult(value + ' 틀렸습니다!!!');
                         }
+
+                        setValue('');
+                        setFirst(Math.ceil(Math.random() * 9));
+                        setSecond(Math.ceil(Math.random() * 9));
                     }
 
                     return (
                             <div>
                                 <div>{first} 곱하기 {second}는?</div>
 
-                                <form>
+                                <form onSubmit={resultCheck}>
                                     <input type="number" value={value} onChange={inputAnswer} />
-                                    <button onClick={resultCheck}>입력!</button>
+
+                                    <button /*onClick={resultCheck}*/>입력!</button>
                                 </form>
 
                                 <div>{result}</div>
