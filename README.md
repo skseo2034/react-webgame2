@@ -71,3 +71,4 @@ class LikeButton extends React.Component { // LikeButton 컴포넌트
             </>
             )
     - 리액트에서 객체(배열, function 등)를 함부로 바꾸지마라, 복사해라(불변성)
+    - 리액트에서 document. 을 사용하지 않는다. dom 객체를 참조하고 싶다면 ref 를 사용해야 한다.

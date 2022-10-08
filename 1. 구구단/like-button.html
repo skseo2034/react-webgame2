@@ -22,31 +22,43 @@
                         setValue(event.target.value);
                     }
 
+                    const myInput = React.useRef(null);
+
                     const resultCheck = (e) => {
                         e.preventDefault();
-                        if ((first * second) == value) {
-                            setResult(value + ' 정답');
-                        } else {
-                            setResult(value + ' 틀렸습니다!!!');
-                        }
+
+                        setValue((prev) => {
+                            if ((first * second) == prev) {
+                                setResult(value + ' 정답');
+                            } else {
+                                setResult(value + ' 틀렸습니다!!!');
+                            }
+
+                            return Math.ceil(Math.random() * 9);
+                        });
 
                         setValue('');
                         setFirst(Math.ceil(Math.random() * 9));
                         setSecond(Math.ceil(Math.random() * 9));
+                        // input 에 focus 주기
+                        // 리액트에는 document 는 거의 사용하지 않는다.
+                        // 리액트가 조작을 할 수 있게 해야 한다.
+                        // document.querySelector('#answerInput').focus();
+                        myInput.current.focus();
                     }
 
                     return (
-                            <div>
+                            <>
                                 <div>{first} 곱하기 {second}는?</div>
 
                                 <form onSubmit={resultCheck}>
-                                    <input type="number" value={value} onChange={inputAnswer} />
+                                    <input ref={myInput} type="number" value={value} onChange={inputAnswer} />
 
-                                    <button /*onClick={resultCheck}*/>입력!</button>
+                                    <button type="submit" /*onClick={resultCheck}*/>입력!</button>
                                 </form>
 
                                 <div>{result}</div>
-                            </div>
+                            </>
                     );
                 }
               /*  const root = ReactDOM.createRoot(document.getElementById('root'));
