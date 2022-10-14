@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
     name: 'wordrelay-setting',
     mode: 'development', // production
-    devtool: 'eval',
+    devtool: 'eval', // hidden-source-map
 
     resolve: {
         extensions: ['.js', '.jsx']
