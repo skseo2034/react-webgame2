@@ -1,4 +1,5 @@
 const path = require('path');
+const {LoaderOptionsPlugin} = require('webpack');
 
 module.exports = {
     name: 'wordrelay-setting',
@@ -19,11 +20,23 @@ module.exports = {
             test: /\.jsx?/,
             loader: 'babel-loader',
             options: {
-                presets: ['@babel/preset-env', '@babel/preset-react'],
+                // 바렐 로드시 옵션을 지원한다. 각각 옵션에 또 설정을 할 수있는데 그때는
+                // 처럼 각각의 옵션에 [옵션명, {옵션내 옵션}] 이렇게 할 수 있다.
+                /*presets: [
+                    ['@babel/preset-env', {
+                   targets: {
+                       browsers: ['> 1% in KR'], // 바벨 적용시 한국사용 브라우져에 5% 이상인건에 맞줘서 하겠다.
+                   },
+                   debug: true, // 개발에서 사용.
+                }],
+                    '@babel/preset-react'],*/
+                presets: ['@babel/preset-env', '@babel/preset-react'], // 설정없는 기본적용.
             },
         }],
     },
-
+    plugins: [
+        new LoaderOptionsPlugin({ debug: true }),
+    ],
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'app.js'

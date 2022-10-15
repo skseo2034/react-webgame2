@@ -80,3 +80,6 @@ class LikeButton extends React.Component { // LikeButton 컴포넌트
         - @babel/preset-env : 최신문법을 브라우져에 맞게 엣날 문법을 지원하는것으로 바꿔 준다.
         - @babel/preset-react : jsx 를 지원가능하게 한다.
         - babel-loader : 바벨과 웹팩을 연곃해 준다.
+
+## 참조사이트
+- [바벨 브라우져 옵션 참고사이트](https://github.com/browserslist/browserslist)
