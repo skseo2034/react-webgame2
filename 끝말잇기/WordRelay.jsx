@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 
  class WordRelay extends Component {
     state = {
-        word: '제로초',
+        word: '제로초3',
         value: '',
         result: '',
     };
