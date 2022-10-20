@@ -1,6 +1,6 @@
 import React from "react";
 import { createRoot } from 'react-dom/client';
-import  WordRelay  from './WordRelay';
+import  NumberBaseball  from './NumberBaseball';
 // import ReactDom from 'react-dom';
 // const React = require('react');
 // const ReactDom = require('react-dom');
@@ -10,6 +10,6 @@ const rootElement = document.querySelector('#root');
 const root = createRoot(rootElement);
 
 root.render(
-    <WordRelay />
+    <NumberBaseball />
 );
 //ReactDom.render(<NumberBaseball />, document.querySelector('#root'));
