@@ -81,5 +81,10 @@ class LikeButton extends React.Component { // LikeButton 컴포넌트
         - @babel/preset-react : jsx 를 지원가능하게 한다.
         - babel-loader : 바벨과 웹팩을 연곃해 준다.
 
+## 주의상항.
+    - 리액트는 array에 push 사용하면 안됨.
+        - const arr = [];  push arr[1] => 이렇게 하면 리액트가 바뀐걸 인지 하지 못한다. 그래서 render 하지 않는다.
+        - const arr1 = []; const arr2 = [...arr1, 1]; => 이런식으로 예전 배열을 복사해서 새로운 배열로 넣어야 한다.
+
 ## 참조사이트
 - [바벨 브라우져 옵션 참고사이트](https://github.com/browserslist/browserslist)
