@@ -85,6 +85,20 @@ class LikeButton extends React.Component { // LikeButton 컴포넌트
     - 리액트는 array에 push 사용하면 안됨.
         - const arr = [];  push arr[1] => 이렇게 하면 리액트가 바뀐걸 인지 하지 못한다. 그래서 render 하지 않는다.
         - const arr1 = []; const arr2 = [...arr1, 1]; => 이런식으로 예전 배열을 복사해서 새로운 배열로 넣어야 한다.
+    - 엣날 state 로 지금 현재 state 를 만들때는 함수형 state 를 사용해야 한다.
+        - 코드 예제
+            this.setState((prevState) => { // 함수형 state 사용
+                return {
+                result: '홈런!',
+                tries: [...prevState.tries, { try: value, result: '홈런!' }],
+                }
+            });
+    - hooks 사용시 setState 에 함수 넣을때 함수명만 넣어야 한다.
+        - 코드 예제
+            const [answer, setAnswer] = useState(getNumbers());
+                => 이렇게 하면 랜더링 될때마다 실행된다. 문제는 되지 않지만, 첫번째 값세팅이후 두번째 부터는 무시한다.
+                    다만, 쓸때없이 리랜더링 될때 마다 호출이 된다.
+            const [answer, setAnswer] = useState(getNumbers); // lazy init => 함수에 return 값이 answer 로 들어간다. 그 다음부터는 실행되지 않는다.
 
 ## 참조사이트
 - [바벨 브라우져 옵션 참고사이트](https://github.com/browserslist/browserslist)

@@ -43,5 +43,5 @@ import React, { useState, useRef } from 'react';
 
 }
 
-// module.exports = NumberBaseball;
+// module.exports = NumberBaseballClass;
 export default WordRelay;
