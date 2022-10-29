@@ -99,6 +99,45 @@ class LikeButton extends React.Component { // LikeButton 컴포넌트
                 => 이렇게 하면 랜더링 될때마다 실행된다. 문제는 되지 않지만, 첫번째 값세팅이후 두번째 부터는 무시한다.
                     다만, 쓸때없이 리랜더링 될때 마다 호출이 된다.
             const [answer, setAnswer] = useState(getNumbers); // lazy init => 함수에 return 값이 answer 로 들어간다. 그 다음부터는 실행되지 않는다.
+    - 리액트는 state 가 바뀌거나, pops 가 바뀔때만 리랜더링 되는게 아니라, 부모가 바뀔때 자식 컴포넌트도 같이 리랜더링 된다.
+        - 이렇게 자식 컴포넌트의 리랜더링을 막기위해서 class 에서는 PureComponent 를 사용하고, hooks 에서는 memo 를 사용한다.
+        - 코드예제.
+            import React, { memo } from 'react';
+            
+            const Try = memo(({tryInfo}) => {
+                        return (
+                            <li>
+                                <div>{tryInfo.try}</div>
+                                <div>{tryInfo.result}</div>
+                            </li>
+                        )
+            });
+    - 전달 받은 props 는 부모에서 바꿔야 한다. 단, 바꾸고 싶을때는 state 를 사용한다. => 좋은 구조 아님.
+        그래야 부모한테 영향을 안 미친다. 자식이 바꿔야 한다면 반드시 state 를 사용한다.
+        - 코드 예제
+            const Try = memo(({tryInfo}) => {
+                tryInfo.resule = 'hello'; // 안됨!!
+                return (
+                    <li>
+                        <div>{tryInfo.try}</div>
+                        <div>{tryInfo.result}</div>
+                    </li>
+                )
+            });
+            => 바꾸고 싶으면 setState 사용
+            const Try = memo(({tryInfo}) => {
+                const [result, setResult] = useState(tryInfo.result);
+
+                const onClick = () => {
+                    setResult('1');
+                };
+                return (
+                    <li>
+                        <div>{tryInfo.try}</div>
+                        <div onClick={onClick}>{result}</div>
+                    </li>
+                )
+            });
 
 ## 참조사이트
 - [바벨 브라우져 옵션 참고사이트](https://github.com/browserslist/browserslist)
