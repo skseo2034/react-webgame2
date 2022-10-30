@@ -1,10 +1,10 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./NumberBaseballClass.jsx":
-/*!*********************************!*\
-  !*** ./NumberBaseballClass.jsx ***!
-  \*********************************/
+/***/ "./ResponseCheck.jsx":
+/*!***************************!*\
+  !*** ./ResponseCheck.jsx ***!
+  \***************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -14,220 +14,42 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Try__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Try */ "./Try.jsx");
 /* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
 __webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+var _s2 = __webpack_require__.$Refresh$.signature();
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-
-function getNumbers() {
-  // 숫자 네 개를 겹치지 않고 랜덤하게 뽑는 함수
-  var candidate = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  var array = [];
-  for (var i = 0; i < 4; i += 1) {
-    var chosen = candidate.splice(Math.floor(Math.random() * (9 - i)), 1)[0];
-    array.push(chosen);
-  }
-  return array;
-}
-var NumberBaseballClass = /*#__PURE__*/function (_Component) {
-  _inherits(NumberBaseballClass, _Component);
-  var _super = _createSuper(NumberBaseballClass);
-  function NumberBaseballClass() {
-    var _this;
-    _classCallCheck(this, NumberBaseballClass);
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-    _this = _super.call.apply(_super, [this].concat(args));
-    _defineProperty(_assertThisInitialized(_this), "state", {
-      result: '',
-      value: '',
-      answer: getNumbers(),
-      // ex: [1,3,5,7]
-      tries: [] // push 쓰면 안 돼요
-    });
-    _defineProperty(_assertThisInitialized(_this), "onSubmitForm", function (e) {
-      var _this$state = _this.state,
-        value = _this$state.value,
-        tries = _this$state.tries,
-        answer = _this$state.answer;
-      e.preventDefault();
-      if (value === answer.join('')) {
-        _this.setState(function (prevState) {
-          return {
-            result: '홈런!',
-            tries: [].concat(_toConsumableArray(prevState.tries), [{
-              "try": value,
-              result: '홈런!'
-            }])
-          };
-        });
-        alert('게임을 다시 시작합니다!');
-        _this.setState({
-          value: '',
-          answer: getNumbers(),
-          tries: []
-        });
-        _this.inputRef.current.focus();
-      } else {
-        // 답 틀렸으면
-        var answerArray = value.split('').map(function (v) {
-          return parseInt(v);
-        });
-        var strike = 0;
-        var ball = 0;
-        if (tries.length >= 9) {
-          // 10번 이상 틀렸을 때
-          _this.setState({
-            result: "10\uBC88 \uB118\uAC8C \uD2C0\uB824\uC11C \uC2E4\uD328! \uB2F5\uC740 ".concat(answer.join(','), "\uC600\uC2B5\uB2C8\uB2E4!")
-          });
-          alert('게임을 다시 시작합니다!');
-          _this.setState({
-            value: '',
-            answer: getNumbers(),
-            tries: []
-          });
-          _this.inputRef.current.focus();
-        } else {
-          for (var i = 0; i < 4; i += 1) {
-            if (answerArray[i] === answer[i]) {
-              strike += 1;
-            } else if (answer.includes(answerArray[i])) {
-              ball += 1;
-            }
-          }
-          _this.setState(function (prevState) {
-            return {
-              tries: [].concat(_toConsumableArray(prevState.tries), [{
-                "try": value,
-                result: "".concat(strike, " \uC2A4\uD2B8\uB77C\uC774\uD06C, ").concat(ball, " \uBCFC\uC785\uB2C8\uB2E4")
-              }]),
-              value: ''
-            };
-          });
-          _this.inputRef.current.focus();
-        }
-      }
-    });
-    _defineProperty(_assertThisInitialized(_this), "onChangeInput", function (e) {
-      console.log(_this.state.answer);
-      _this.setState({
-        value: e.target.value
-      });
-    });
-    _defineProperty(_assertThisInitialized(_this), "inputRef", /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createRef)());
-    return _this;
-  }
-  _createClass(NumberBaseballClass, [{
-    key: "render",
-    value:
-    // this.inputRef
-
-    function render() {
-      var _this$state2 = this.state,
-        result = _this$state2.result,
-        value = _this$state2.value,
-        tries = _this$state2.tries;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, result), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
-        onSubmit: this.onSubmitForm
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-        ref: this.inputRef,
-        maxLength: 4,
-        value: value,
-        onChange: this.onChangeInput
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "\uC2DC\uB3C4: ", tries.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, tries.map(function (v, i) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Try__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          key: "".concat(i + 1, "\uCC28 \uC2DC\uB3C4 :"),
-          tryInfo: v
-        });
-      })));
-    }
-  }]);
-  return NumberBaseballClass;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NumberBaseballClass); // import NumberBaseballClass;
-
-const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
-const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
-	$ReactRefreshModuleId$
-);
-
-function $ReactRefreshModuleRuntime$(exports) {
-	if (false) {}
-}
-
-if (typeof Promise !== 'undefined' && $ReactRefreshCurrentExports$ instanceof Promise) {
-	$ReactRefreshCurrentExports$.then($ReactRefreshModuleRuntime$);
-} else {
-	$ReactRefreshModuleRuntime$($ReactRefreshCurrentExports$);
-}
-
-/***/ }),
-
-/***/ "./Try.jsx":
-/*!*****************!*\
-  !*** ./Try.jsx ***!
-  \*****************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
-__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
-
-
-var Try = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(_c = function _c(_ref) {
-  var tryInfo = _ref.tryInfo;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, tryInfo["try"]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, tryInfo.result));
-});
-
-/*const Try = ({props}) => {
-    return (
-        <li>
-            <div>{props.tryInfo.try}</div>
-            <div>{props.tryInfo.result}</div>
-        </li>
-    )
-}*/
-/*class Try extends Component {
-    render() {
-        return (
-           <li>
-               <div>{this.props.tryInfo.try}</div>
-               <div>{this.props.tryInfo.result}</div>
-           </li>
-        )
-    }
-}*/
-_c2 = Try;
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Try);
-var _c, _c2;
-__webpack_require__.$Refresh$.register(_c, "Try$memo");
-__webpack_require__.$Refresh$.register(_c2, "Try");
+var ResponseCheck = function ResponseCheck() {
+  _s2();
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('waiting'),
+    _useState2 = _slicedToArray(_useState, 2),
+    state = _useState2[0],
+    setState = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('클릭해서 시작해 주세요'),
+    _useState4 = _slicedToArray(_useState3, 2),
+    message = _useState4[0],
+    setMessage = _useState4[1];
+  cosnt[(result, setResult)] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  var onClickScreen = function onClickScreen() {};
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    id: "seceen",
+    className: state,
+    onClick: onClickScreen
+  }, message), /*#__PURE__*/React.createElement("div", null, "\uD3C9\uADE0 \uC2DC\uAC04: ", result.reduce(function (a, c) {
+    return a + c;
+  }) / result.length, "ms"));
+};
+_s2(ResponseCheck, "DUeqdJFa2iCc908RLuRjnJPs40A=");
+_c = ResponseCheck;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ResponseCheck);
+var _c;
+__webpack_require__.$Refresh$.register(_c, "ResponseCheck");
 
 const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
 const $ReactRefreshCurrentExports$ = __react_refresh_utils__.getModuleExports(
@@ -257,21 +79,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
-/* harmony import */ var _NumberBaseballClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./NumberBaseballClass */ "./NumberBaseballClass.jsx");
+/* harmony import */ var _ResponseCheck__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ResponseCheck */ "./ResponseCheck.jsx");
 /* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
 __webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
 
 
 
 
-// import ReactDom from 'react-dom';
-// const React = require('react');
-// const ReactDom = require('react-dom');
-// const NumberBaseballClass = require('./NumberBaseballClass');
-
 var rootElement = document.querySelector('#root');
 var root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(rootElement);
-root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_NumberBaseballClass__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_ResponseCheck__WEBPACK_IMPORTED_MODULE_2__["default"], null));
 //ReactDom.render(<NumberBaseballClass />, document.querySelector('#root'));
 
 const $ReactRefreshModuleId$ = __webpack_require__.$Refresh$.moduleId;
@@ -1593,8 +1410,8 @@ var NATIVE_BIND = __webpack_require__(/*! ../internals/function-bind-native */ "
 var FunctionPrototype = Function.prototype;
 var call = FunctionPrototype.call;
 var uncurryThisWithBind = NATIVE_BIND && FunctionPrototype.bind.bind(call, call);
-module.exports = function (fn) {
-  return NATIVE_BIND ? uncurryThisWithBind(fn) : function () {
+module.exports = NATIVE_BIND ? uncurryThisWithBind : function (fn) {
+  return function () {
     return call.apply(fn, arguments);
   };
 };
@@ -2950,10 +2767,10 @@ var store = __webpack_require__(/*! ../internals/shared-store */ "./node_modules
 (module.exports = function (key, value) {
   return store[key] || (store[key] = value !== undefined ? value : {});
 })('versions', []).push({
-  version: '3.25.5',
+  version: '3.26.0',
   mode: IS_PURE ? 'pure' : 'global',
   copyright: '© 2014-2022 Denis Pushkarev (zloirock.ru)',
-  license: 'https://github.com/zloirock/core-js/blob/v3.25.5/LICENSE',
+  license: 'https://github.com/zloirock/core-js/blob/v3.26.0/LICENSE',
   source: 'https://github.com/zloirock/core-js'
 });
 
