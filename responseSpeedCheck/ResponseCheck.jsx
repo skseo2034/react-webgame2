@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 
 
-
+let timeout;
+let startTime = 0;
+let endTime = 0;
 const ResponseCheck = () => {
-    let timeout;
-    let startTime = 0;
-    let endTime = 0;
+
     const [state, setState] = useState('waiting');
     const [message, setMessage] = useState('클릭해서 시작해 주세요');
     const [result, setResult] = useState([0]);
@@ -20,6 +20,7 @@ const ResponseCheck = () => {
                 setState('now');
                 setMessage('지금 클릭');
                 startTime = new Date();
+                console.log('bbbb>>>>', startTime);
             }, Math.floor(Math.random() * 1000) + 2000); // 2~3초 랜덤
         } else if (state === 'ready') { // 성급하게 클릭
             setState('waiting');
@@ -30,15 +31,24 @@ const ResponseCheck = () => {
             setState('waiting')
             setMessage('클릭해서 시작하세요');
             setResult((prevResult) => {
+                console.log('aaaa>>>>', endTime, startTime);
+                console.log('aaaa>>>>', startTime);
                 return [...prevResult, endTime - startTime];
             });
         }
     };
 
+    const onReset = () => {
+        setResult([]);
+    }
+
     const renderAverage = () => {
         return result.length === 0
             ? null
-            : <div>평균 시간: {result.reduce((a, c) => a + c) / result.length}ms</div>
+            : <>
+                <div>평균 시간: {result.reduce((a, c) => a + c) / result.length}ms</div>
+                <button onClick={onReset}>리셋</button>
+              </>
     };
 
     return (
