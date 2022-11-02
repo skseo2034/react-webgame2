@@ -138,6 +138,8 @@ class LikeButton extends React.Component { // LikeButton 컴포넌트
                     </li>
                 )
             });
+    - useState 는 바뀌면 return 부분이 랜더링 되지만, useRef 는 랜더링 되지 않는다.
+        그래서 값이 바뀌어도 랜더링 하지 않고 싶다면 useRef 를 사용하면 된다.
 
 ## 참조사이트
 - [바벨 브라우져 옵션 참고사이트](https://github.com/browserslist/browserslist)

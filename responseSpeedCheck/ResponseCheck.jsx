@@ -1,14 +1,14 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 
 
-let timeout;
-let startTime = 0;
-let endTime = 0;
 const ResponseCheck = () => {
 
     const [state, setState] = useState('waiting');
     const [message, setMessage] = useState('클릭해서 시작해 주세요');
     const [result, setResult] = useState([0]);
+    const timeout = useRef(null);
+    const startTime = useRef();
+    const endTime = useRef();
 
     const onClickScreen = () => {
 
@@ -16,24 +16,21 @@ const ResponseCheck = () => {
             setState('ready');
             setMessage('초록색이 되면 클릭 하세요.');
 
-            timeout = setTimeout(() => {
+            timeout.current = setTimeout(() => {
                 setState('now');
                 setMessage('지금 클릭');
-                startTime = new Date();
-                console.log('bbbb>>>>', startTime);
+                startTime.current = new Date();
             }, Math.floor(Math.random() * 1000) + 2000); // 2~3초 랜덤
         } else if (state === 'ready') { // 성급하게 클릭
             setState('waiting');
             setMessage('너무 성급하시군요! 초록색이 된 후에 클릭하세요');
             clearTimeout(timeout);
         } else if (state === 'now') { // 반응속도 케크
-            endTime = new Date();
+            endTime.current = new Date();
             setState('waiting')
             setMessage('클릭해서 시작하세요');
             setResult((prevResult) => {
-                console.log('aaaa>>>>', endTime, startTime);
-                console.log('aaaa>>>>', startTime);
-                return [...prevResult, endTime - startTime];
+                return [...prevResult, endTime.current - startTime.current];
             });
         }
     };
