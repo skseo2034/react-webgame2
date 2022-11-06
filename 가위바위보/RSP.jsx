@@ -1,4 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
+import {re} from "@babel/core/lib/vendor/import-meta-resolve";
 
 
 const rspCoords = {
@@ -7,19 +8,25 @@ const rspCoords = {
     보: '-284px',
 };
 
-const score = {
+const scores = {
     바위: 1,
     가위: 0,
     보: -1,
+};
+
+const computerChoice = (imgCoord) => {
+    return Object.entries(rspCoords).find(function(v) {
+        return v[1] === imgCoord;
+    })[0];
 };
 
 const RSP = () => {
     const [result, setResult] = useState('');
     const [score, setScore] = useState(0);
     const [imgCoord, seImgCoord] = useState(0);
+    let interval;
 
-    useEffect(() => { // 랜더링 후 실행, JSP 기준 document ready, DOMContentLoaded, 리액트 class componentDidMount()
-        const interval = setInterval(() => {
+    const changeHand = () => {
             if (imgCoord === rspCoords.바위) {
                 seImgCoord(rspCoords.가위);
             } else if (imgCoord === rspCoords.가위) {
@@ -27,7 +34,9 @@ const RSP = () => {
             } else {
                 seImgCoord(rspCoords.바위);
             }
-        }, 1000);
+    }
+     useEffect(() => { // 랜더링 후 실행, JSP 기준 document ready, DOMContentLoaded, 리액트 class componentDidMount()
+        interval = setInterval(() => changeHand(), 100);
         return () => {
             window.clearInterval(interval);
         };
@@ -48,8 +57,29 @@ const RSP = () => {
         window.addEventListener("scroll", onScroll);
         return () => window.removeEventListener("scroll", onScroll); <---- 집중 !!!
     }, []);*/
-    const onClickBtn = (aaa) => {
-        //...
+    const onClickBtn = (choice) => {
+        window.clearInterval(interval);
+        const myScore = scores[choice];
+        const cpuScore = scores[computerChoice(imgCoord)];
+        const diff = myScore - cpuScore;
+        if (diff === 0) {
+            setResult('비겼습니다!');
+        } else if ([-1, 2].includes(diff)) {
+            setResult('이겼습니다1');
+            setScore((prevScore) => {
+                return prevScore + 1;
+            });
+        } else {
+            setResult('졌습니다!');
+            setScore((prevScore) => {
+                return prevScore - 1;
+            });
+        }
+
+        setTimeout(() => {
+            interval = setInterval(() => changeHand(), 100);
+        }, 2000);
+
     }
     return (
         <>

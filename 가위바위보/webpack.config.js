@@ -10,7 +10,13 @@ module.exports = {
     devtool: 'source-map', //'eval', // hidden-source-map
 
     resolve: {
-        extensions: ['.js', '.jsx']
+        extensions: ['.js', '.jsx'],
+        fallback: {
+            url: require.resolve("url/"),
+            path: require.resolve("path-browserify"),
+            assert: require.resolve("assert/"),
+            fs: false
+        }
     },
 
     entry: {
