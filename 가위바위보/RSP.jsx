@@ -57,7 +57,7 @@ const RSP = () => {
         window.addEventListener("scroll", onScroll);
         return () => window.removeEventListener("scroll", onScroll); <---- 집중 !!!
     }, []);*/
-    const onClickBtn = (choice) => {
+    const onClickBtn = (choice) => () => { // () => onClickBtn('바위') 을 간소화 하기 위해 () => 추가 : 고차함수
         window.clearInterval(interval);
         const myScore = scores[choice];
         const cpuScore = scores[computerChoice(imgCoord)];
@@ -85,9 +85,10 @@ const RSP = () => {
         <>
             <div id="computer" style={{ background: `url(https://en.pimg.jp/023/182/267/1/23182267.jpg) ${imgCoord} 0`}} />
             <div>
-                <button id="rock" className="btn" onClick={() => onClickBtn('바위')}>바위</button>
-                <button id="scissor" className="btn" onClick={() => onClickBtn('가위')}>가위</button>
-                <button id="paper" className="btn" onClick={() => onClickBtn('보')}>보</button>
+               {/* <button id="rock" className="btn" onClick={() => onClickBtn('바위')}>바위</button>*/}
+                <button id="rock" className="btn" onClick={onClickBtn('바위')}>바위</button>
+                <button id="scissor" className="btn" onClick={onClickBtn('가위')}>가위</button>
+                <button id="paper" className="btn" onClick={onClickBtn('보')}>보</button>
             </div>
             <div>{result}</div>
             <div>현재 {score}점</div>
