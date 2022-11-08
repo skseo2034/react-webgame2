@@ -1,5 +1,4 @@
 import React, {useEffect, useRef, useState} from "react";
-import {re} from "@babel/core/lib/vendor/import-meta-resolve";
 
 
 const rspCoords = {
@@ -22,26 +21,26 @@ const computerChoice = (imgCoord) => {
 
 const RSP = () => {
     const [result, setResult] = useState('');
-    const [score, setScore] = useState(0);
+    const [score, setScore] = useState(rspCoords.바위);
     const [imgCoord, seImgCoord] = useState(0);
-    let interval;
+    const interval = useRef();
 
     const changeHand = () => {
-            if (imgCoord === rspCoords.바위) {
-                seImgCoord(rspCoords.가위);
-            } else if (imgCoord === rspCoords.가위) {
-                seImgCoord(rspCoords.보);
-            } else {
-                seImgCoord(rspCoords.바위);
-            }
+        if (imgCoord === rspCoords.바위) {
+            seImgCoord(rspCoords.가위);
+        } else if (imgCoord === rspCoords.가위) {
+            seImgCoord(rspCoords.보);
+        } else {
+            seImgCoord(rspCoords.바위);
+        }
     }
-     useEffect(() => { // 랜더링 후 실행, JSP 기준 document ready, DOMContentLoaded, 리액트 class componentDidMount()
-        interval = setInterval(() => changeHand(), 100);
-        return () => {
-            window.clearInterval(interval);
+    useEffect(() => { // 랜더링 후 실행, JSP 기준 document ready, DOMContentLoaded, 리액트 class componentDidMount(), compnentDidUpdate 역할
+        interval.current = setInterval(changeHand, 100);
+        return () => { // class componentWillUnmount 역할
+            clearInterval(interval.current);
         };
         //return () => clearInterval(interval);
-       //clearInterval(interval);
+        //clearInterval(interval);
     }, [imgCoord]); // 랜더링 직후 함번만 실행 위해 빈배열 넣음. [result] 를 넣으면 setResult 될때 마다 실행(class componentDidUpdate )
 
     /*useEffect(() => {
@@ -51,16 +50,18 @@ const RSP = () => {
     }, []);*/
 
     // componentWillUnmount 예시
-   /* useEffect(() => {
-        // scroll 이벤트를 만들어줍니다. 스크롤을 움직일때 마다
-        // onScroll 함수가 실행됩니다.
-        window.addEventListener("scroll", onScroll);
-        return () => window.removeEventListener("scroll", onScroll); <---- 집중 !!!
-    }, []);*/
+    /* useEffect(() => {
+         // scroll 이벤트를 만들어줍니다. 스크롤을 움직일때 마다
+         // onScroll 함수가 실행됩니다.
+         window.addEventListener("scroll", onScroll);
+         return () => window.removeEventListener("scroll", onScroll); <---- 집중 !!!
+     }, []);*/
     const onClickBtn = (choice) => () => { // () => onClickBtn('바위') 을 간소화 하기 위해 () => 추가 : 고차함수
-        window.clearInterval(interval);
+        clearInterval(interval.current);
         const myScore = scores[choice];
+        console.log('seo >>>>>>>>>>>>>>', choice, myScore);
         const cpuScore = scores[computerChoice(imgCoord)];
+        console.log('seo11 >>>>>>>>>>>>>>', imgCoord, cpuScore);
         const diff = myScore - cpuScore;
         if (diff === 0) {
             setResult('비겼습니다!');
@@ -77,7 +78,7 @@ const RSP = () => {
         }
 
         setTimeout(() => {
-            interval = setInterval(() => changeHand(), 100);
+            interval.current = setInterval(changeHand, 100);
         }, 2000);
 
     }
@@ -85,7 +86,7 @@ const RSP = () => {
         <>
             <div id="computer" style={{ background: `url(https://en.pimg.jp/023/182/267/1/23182267.jpg) ${imgCoord} 0`}} />
             <div>
-               {/* <button id="rock" className="btn" onClick={() => onClickBtn('바위')}>바위</button>*/}
+                {/* <button id="rock" className="btn" onClick={() => onClickBtn('바위')}>바위</button>*/}
                 <button id="rock" className="btn" onClick={onClickBtn('바위')}>바위</button>
                 <button id="scissor" className="btn" onClick={onClickBtn('가위')}>가위</button>
                 <button id="paper" className="btn" onClick={onClickBtn('보')}>보</button>

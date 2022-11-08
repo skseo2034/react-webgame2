@@ -148,3 +148,11 @@ class LikeButton extends React.Component { // LikeButton 컴포넌트
 
 ## 참조사이트
 - [바벨 브라우져 옵션 참고사이트](https://github.com/browserslist/browserslist)
+
+## 기타 TIP
+- npm clean
+    rm -rf node_modules
+    rm -f package-lock.json
+    rm -f yarn.lock
+    npm cache clean --force
+    npm install
