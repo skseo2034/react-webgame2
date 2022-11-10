@@ -85,6 +85,8 @@ class LikeButton extends React.Component { // LikeButton 컴포넌트
             constructor -> render -> componentDidMount 
             -> (setState/props 바뀔때 -> shouldComponentUPdate -> render -> componentDidUpdate)
             -> 부모 컴포넌트가 나(자식 컴포넌트)를 없앨때 -> componentWillUnmount -> 소멸
+    - 통상 특정 hooks 가 2개이상 반복 될때 custom hooks 를 만드는게 좋다.
+        - useEffect 와 useRef 가 custom hooks 로 만들기 좋다.
 
 ## 주의상항.
     - 리액트는 array에 push 사용하면 안됨.

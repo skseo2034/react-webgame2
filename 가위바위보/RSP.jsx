@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
-
+import useInterval from "./useInterval";
 
 const rspCoords = {
     바위: '0',
@@ -23,7 +23,9 @@ const RSP = () => {
     const [result, setResult] = useState('');
     const [score, setScore] = useState(rspCoords.바위);
     const [imgCoord, seImgCoord] = useState(0);
-    const interval = useRef();
+    const [isRunning, setIsRunning] = useState(ture);
+
+
 
     const changeHand = () => {
         if (imgCoord === rspCoords.바위) {
@@ -34,20 +36,16 @@ const RSP = () => {
             seImgCoord(rspCoords.바위);
         }
     }
-    useEffect(() => { // 랜더링 후 실행, JSP 기준 document ready, DOMContentLoaded, 리액트 class componentDidMount(), compnentDidUpdate 역할
-        interval.current = setInterval(changeHand, 100);
-        return () => { // class componentWillUnmount 역할
-            clearInterval(interval.current);
-        };
-        //return () => clearInterval(interval);
-        //clearInterval(interval);
-    }, [imgCoord]); // 랜더링 직후 함번만 실행 위해 빈배열 넣음. [result] 를 넣으면 setResult 될때 마다 실행(class componentDidUpdate )
 
-    /*useEffect(() => {
-        window.addEventListener("interval", setInterval);
-       return () => window.removeEventListener("interval", setInterval);
-        // return () => clearInterval(interval);
-    }, []);*/
+    useInterval(changeHand, isRunning ? 100 : null); // 커스텀 훅
+   /* const interval = useRef();
+
+    useEffect(() => {
+        interval.current = setInterval(changeHand, 100);
+       return () => {
+           clearInterval(interval.current);
+       }
+    }, [imgCoord]);*/
 
     // componentWillUnmount 예시
     /* useEffect(() => {
@@ -57,30 +55,31 @@ const RSP = () => {
          return () => window.removeEventListener("scroll", onScroll); <---- 집중 !!!
      }, []);*/
     const onClickBtn = (choice) => () => { // () => onClickBtn('바위') 을 간소화 하기 위해 () => 추가 : 고차함수
-        clearInterval(interval.current);
-        const myScore = scores[choice];
-        console.log('seo >>>>>>>>>>>>>>', choice, myScore);
-        const cpuScore = scores[computerChoice(imgCoord)];
-        console.log('seo11 >>>>>>>>>>>>>>', imgCoord, cpuScore);
-        const diff = myScore - cpuScore;
-        if (diff === 0) {
-            setResult('비겼습니다!');
-        } else if ([-1, 2].includes(diff)) {
-            setResult('이겼습니다1');
-            setScore((prevScore) => {
-                return prevScore + 1;
-            });
-        } else {
-            setResult('졌습니다!');
-            setScore((prevScore) => {
-                return prevScore - 1;
-            });
+        if (isRunning) {
+            // clearInterval(interval.current);
+            setIsRunning(false);
+            const myScore = scores[choice];
+            const cpuScore = scores[computerChoice(imgCoord)];
+            const diff = myScore - cpuScore;
+            if (diff === 0) {
+                setResult('비겼습니다!');
+            } else if ([-1, 2].includes(diff)) {
+                setResult('이겼습니다1');
+                setScore((prevScore) => {
+                    return prevScore + 1;
+                });
+            } else {
+                setResult('졌습니다!');
+                setScore((prevScore) => {
+                    return prevScore - 1;
+                });
+            }
+
+            setTimeout(() => {
+                // interval.current = setInterval(changeHand, 100);
+                setIsRunning(true)
+            }, 1000);
         }
-
-        setTimeout(() => {
-            interval.current = setInterval(changeHand, 100);
-        }, 2000);
-
     }
     return (
         <>
