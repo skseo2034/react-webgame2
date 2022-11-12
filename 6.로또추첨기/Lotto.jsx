@@ -1,4 +1,4 @@
-import React, {Component, useState} from "react";
+import React, {Component, useEffect, useRef, useState} from "react";
 import Ball from './Ball';
 
 function getWinNumbers() {
@@ -19,7 +19,28 @@ const Lotto = () => {
     const [bonus, setBonus] = useState(null); // 보너스 공
     const [redo, setRedo] = useState(false);
 
+    const timeouts = useRef([]);
 
+    useEffect(() => {
+        for (let i = 0; i < winNumbers.length - 1;i++) {
+            timeouts[i].current = setTimeout(() => {
+               setWinBalls((prevWinBalls) => {
+                  return [...prevWinBalls, winNumbers[i]];
+               })
+            }, (i + 1) * 1000);
+        }
+        timeouts[6].current = setTimeout(() => {
+                setBonus(winNumbers[6]);
+                setRedo(ture);
+        }, 7000);
+
+        return () => {
+            timeouts.current.forEach((v) => {
+                clearTimeout(v);
+            })
+        }
+
+    }, [winNumbers]);
 
     return (
         <>
@@ -29,7 +50,7 @@ const Lotto = () => {
             </div>
             <div>보너스!</div>
             {bonus && <Ball number={bonus} /> }
-            <button onClick={redo ? this.onClickRedo : () => {}}>한 번 더!</button>
+            {redo && <button onClick={onClickRedo}>한 번 더!</button>}
         </>
 
     );
