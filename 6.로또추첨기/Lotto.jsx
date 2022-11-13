@@ -5,11 +5,12 @@ function getWinNumbers() {
     console.log('getWinNumbers');
     const candidate = Array(45).fill().map((v, i) => i + 1);
     const shuffle = [];
+
     while (candidate.length > 0) {
-        shuffle.push(candidate.slice(Math.floor(Math.random() * candidate.length), 1)[0]);
+        shuffle.push(candidate.splice(Math.floor(Math.random() * candidate.length), 1)[0]);
     }
     const bonusNumber = shuffle[shuffle.length - 1];
-    const winNumbers = shuffle.slice(0, 6).sort((p, c) => p - c);
+    const winNumbers = shuffle.splice(0, 6).sort((p, c) => p - c);
     return [...winNumbers, bonusNumber];
 }
 
@@ -23,15 +24,15 @@ const Lotto = () => {
 
     useEffect(() => {
         for (let i = 0; i < winNumbers.length - 1;i++) {
-            timeouts[i].current = setTimeout(() => {
+            timeouts.current[i] = setTimeout(() => {
                setWinBalls((prevWinBalls) => {
                   return [...prevWinBalls, winNumbers[i]];
                })
             }, (i + 1) * 1000);
         }
-        timeouts[6].current = setTimeout(() => {
+        timeouts.current[6] = setTimeout(() => {
                 setBonus(winNumbers[6]);
-                setRedo(ture);
+                setRedo(true);
         }, 7000);
 
         return () => {
@@ -40,7 +41,15 @@ const Lotto = () => {
             })
         }
 
-    }, [winNumbers]);
+    }, [timeouts.current]);
+
+    const onClickRedo = () => {
+        setWinNumbers(getWinNumbers()); // 당첨 숫자들
+        setWinBalls([]);
+        setBonus(null); // 보너스 공
+        setRedo(false);
+        timeouts.current = [];
+    };
 
     return (
         <>
