@@ -22,7 +22,17 @@ const Lotto = () => {
 
     const timeouts = useRef([]);
 
+    const onClickRedo = () => {
+        console.log('onClickRedo');
+        setWinNumbers(getWinNumbers()); // 당첨 숫자들
+        setWinBalls([]);
+        setBonus(null); // 보너스 공
+        setRedo(false);
+        timeouts.current = [];
+    };
+
     useEffect(() => {
+        console.log('useEffect');
         for (let i = 0; i < winNumbers.length - 1;i++) {
             timeouts.current[i] = setTimeout(() => {
                setWinBalls((prevWinBalls) => {
@@ -35,21 +45,15 @@ const Lotto = () => {
                 setRedo(true);
         }, 7000);
 
-        return () => {
+        return () => {  // componetWillUnmount 는 return 만 하면 대체 된다.
             timeouts.current.forEach((v) => {
                 clearTimeout(v);
             })
         }
+    }, [winNumbers]); // 빈 배열이면 componetDidMount 와 동일
+    // 배일에 요소가 있으면 componentDidMount, componetDidUpdate 둘다 수행
 
-    }, [timeouts.current]);
 
-    const onClickRedo = () => {
-        setWinNumbers(getWinNumbers()); // 당첨 숫자들
-        setWinBalls([]);
-        setBonus(null); // 보너스 공
-        setRedo(false);
-        timeouts.current = [];
-    };
 
     return (
         <>

@@ -151,6 +151,7 @@ class LikeButton extends React.Component { // LikeButton 컴포넌트
 
 ## 참조사이트
 - [바벨 브라우져 옵션 참고사이트](https://github.com/browserslist/browserslist)
+- [useRef 언제 사용하는가?](https://yoonjong-park.tistory.com/entry/React-useRef-%EB%8A%94-%EC%96%B8%EC%A0%9C-%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94%EA%B0%80)
 
 ## 기타 TIP
 - npm clean
