@@ -88,6 +88,15 @@ class LikeButton extends React.Component { // LikeButton 컴포넌트
     - 통상 특정 hooks 가 2개이상 반복 될때 custom hooks 를 만드는게 좋다.
         - useEffect 와 useRef 가 custom hooks 로 만들기 좋다.
     - 개발시 console.log 를 함수 마다 넣어라. 그래서 필요할때 마다 호출 되는지 확인 하는게 좋다.
+    - 훅스를 사용할때는 함수컴포넌트가 실행 될때 마다 함수전체가 실행됨으로 같이 실행이 된다.
+        따라서 아래에 getWinNumbers() 도 매번 실행이 된다. 만약 10초이상 걸리는 함수라면? 문제가 된다.
+            const Lotto = () => {
+                const lottoNumbers = useMemo(() => getWinNumbers(), []);
+                ....
+            }
+        이때 useMemo 를 사용한다. useMemo 는 getWinNUmbers() 기억했다가  사용함으로 실행 되지 않는다.
+        참고로 useMemo 와 useCallback 는 뒤에 파라메터 인자가 하나더 있다.([]) 여기에 값이 있으면, 이값이 변할때 실행 된다.
+        복잡한 함수결과값 저장은 useMemo, 일반값 기억은 useRef를 사용하면 된다.
 
 ## 주의상항.
     - 리액트는 array에 push 사용하면 안됨.
@@ -148,6 +157,23 @@ class LikeButton extends React.Component { // LikeButton 컴포넌트
             });
     - useState 는 바뀌면 return 부분이 랜더링 되지만, useRef 는 랜더링 되지 않는다.
         그래서 값이 바뀌어도 랜더링 하지 않고 싶다면 useRef 를 사용하면 된다.
+    - 자식 컴포넌트에 props 로 함수를 넘길때는 useCallback 를 꼭 해야 한다. (Lotto.jsx 참고)
+        - 코드 예제
+            const onClickRedo = useCallback(() => { // useCallback 는 함수자체를 기억한다.
+               .....
+            }, [winNumbers]); 
+            return (
+            <>
+                <div>당첨 숫자</div>
+                <div id="결과창">
+                    {winBalls.map((v) => <Ball key={v} number={v} />)}
+                </div>
+                <div>보너스!</div>
+                {bonus && <Ball number={bonus} onClick={onClickRedo()}/> } // 자식 컴포넌트에 props 로 함수를 넘길때는 useCallback 를 꼭 해야 한다.
+                {redo && <button onClick={onClickRedo}>한 번 더!</button>}
+            </>
+
+    );
 
 ## 참조사이트
 - [바벨 브라우져 옵션 참고사이트](https://github.com/browserslist/browserslist)

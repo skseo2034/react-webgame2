@@ -1,4 +1,4 @@
-import React, {Component, useEffect, useRef, useState} from "react";
+import React, { Component, useEffect, useRef, useState, useMemo, useCallback } from "react";
 import Ball from './Ball';
 
 function getWinNumbers() {
@@ -15,6 +15,12 @@ function getWinNumbers() {
 }
 
 const Lotto = () => {
+    // 훅스를 사용할때는 함수컴포넌트가 실행 될때 마다 함수전체가 실행됨으로 같이 실행이 된다.
+    // 따라서 아래에 getWinNumbers() 도 매번 실행이 된다. 만약 10초이상 걸리는 함수라면? 문제가 된다.
+    // 이때 useMemo 를 사용한다. useMemo 는 getWinNUmbers() 기억했다가  사용함으로 실행 되지 않는다.
+    // 참고로 useMemo 와 useCallback 는 뒤에 파라메터 인자가 하나더 있다.([]) 여기에 값이 있으면, 이값이 변할때 실행 된다.
+    // 복잡한 함수결과값 저장은 useMemo, 일반값 기억은 useRef를 사용하면 된다.
+    const lottoNumbers = useMemo(() => getWinNumbers(), []);
     const [winNumbers, setWinNumbers] = useState(getWinNumbers()); // 당첨 숫자들
     const [winBalls, setWinBalls] = useState([]);
     const [bonus, setBonus] = useState(null); // 보너스 공
@@ -22,14 +28,15 @@ const Lotto = () => {
 
     const timeouts = useRef([]);
 
-    const onClickRedo = () => {
+    const onClickRedo = useCallback(() => { // useCallback 는 함수자체를 기억한다.
         console.log('onClickRedo');
+        console.log(winNumbers); // 이 값은 변해야 하나 변하지 않는다. 따라서 useCallback 두번째인자에 이값을 넣는다.
         setWinNumbers(getWinNumbers()); // 당첨 숫자들
         setWinBalls([]);
         setBonus(null); // 보너스 공
         setRedo(false);
         timeouts.current = [];
-    };
+    }, [winNumbers]); // 값을 변경하기 위해 두번째 인자에 넣음.
 
     useEffect(() => {
         console.log('useEffect');
@@ -62,7 +69,7 @@ const Lotto = () => {
                 {winBalls.map((v) => <Ball key={v} number={v} />)}
             </div>
             <div>보너스!</div>
-            {bonus && <Ball number={bonus} /> }
+            {bonus && <Ball number={bonus} onClick={onClickRedo()}/> } // 자식 컴포넌트에 props 로 함수를 넘길때는 useCallback 를 꼭 해야 한다.
             {redo && <button onClick={onClickRedo}>한 번 더!</button>}
         </>
 
