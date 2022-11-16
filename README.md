@@ -97,6 +97,22 @@ class LikeButton extends React.Component { // LikeButton 컴포넌트
         이때 useMemo 를 사용한다. useMemo 는 getWinNUmbers() 기억했다가  사용함으로 실행 되지 않는다.
         참고로 useMemo 와 useCallback 는 뒤에 파라메터 인자가 하나더 있다.([]) 여기에 값이 있으면, 이값이 변할때 실행 된다.
         복잡한 함수결과값 저장은 useMemo, 일반값 기억은 useRef를 사용하면 된다.
+    - useEffect 는 componentDidMount 에서 무조건 발생한다.
+      그런데. componentDidUpdate 에서만 하고 싶다. (componentDidMount 에서는 실행 안하고 싶을때)
+      이때 꼼수사용. 코드 예제
+        const mounted = useRef(false);
+        useEffect(() => {
+            if (!mounted.current) { // componentDidMount 에서 실행은 되나 아무것도 안한다.
+                mounted.current = true;
+            } else {
+                // ajax 요청
+            }
+        }, [바뀌는값]);
+    - componentDidMount 에서만 하고 싶다.
+        - 코드예
+        useEffect(() => {
+           // ajax
+        }, []); // 빈배열로 주면 componentDidMount 에서만 실행
 
 ## 주의상항.
     - 리액트는 array에 push 사용하면 안됨.
@@ -174,6 +190,17 @@ class LikeButton extends React.Component { // LikeButton 컴포넌트
             </>
 
     );
+    - 훅스(hooks) 는 반드시 순서를 지켜야 한다.
+        - 따라서 조건문이나 반복문에 넣어면 안된다.
+        - 코드예 
+            const lottoNumbers = useMemo(() => getWinNumbers(), []);
+            const [winNumbers, setWinNumbers] = useState(getWinNumbers()); // 당첨 숫자들
+            const [winBalls, setWinBalls] = useState([]);
+            if (조건) { // 이럴경우 조건에 따라 훅스 순서가 변경된다. 이러면 안된다.
+                const [bonus, setBonus] = useState(null); // 보너스 공
+            } 
+            const [redo, setRedo] = useState(false);
+    - useEffect, useCallback, useMemo 안에서 useState 를 사용한면 안된다.
 
 ## 참조사이트
 - [바벨 브라우져 옵션 참고사이트](https://github.com/browserslist/browserslist)

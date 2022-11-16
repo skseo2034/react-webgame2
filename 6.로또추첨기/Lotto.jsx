@@ -38,6 +38,24 @@ const Lotto = () => {
         timeouts.current = [];
     }, [winNumbers]); // 값을 변경하기 위해 두번째 인자에 넣음.
 
+    // componentDidMount 에서만 하고 싶다.
+    useEffect(() => {
+       // ajax
+    }, []); // 빈배열로 주면 componentDidMount 에서만 실행
+
+    // useEffect 는 componentDidMount 에서 무조건 발생한다.
+    // 그런데. componentDidUpdate 에서만 하고 싶다. (componentDidMount 에서는 실행 안하고 싶을때)
+    // 꼼수사용.
+    /*const mounted = useRef(false);
+    useEffect(() => {
+        if (!mounted.current) { // componentDidMount 에서 실행은 되나 아무것도 안한다.
+            mounted.current = true;
+        } else {
+            // ajax 요청
+        }
+    }, [바뀌는값]);*/
+
+
     useEffect(() => {
         console.log('useEffect');
         for (let i = 0; i < winNumbers.length - 1;i++) {
