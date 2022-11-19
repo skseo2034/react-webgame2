@@ -113,6 +113,8 @@ class LikeButton extends React.Component { // LikeButton 컴포넌트
         useEffect(() => {
            // ajax
         }, []); // 빈배열로 주면 componentDidMount 에서만 실행
+    - useReducer는 useState처럼 State를 관리하고 업데이트 할 수 있는 Hook  이다.
+    
 
 ## 주의상항.
     - 리액트는 array에 push 사용하면 안됨.
@@ -205,6 +207,7 @@ class LikeButton extends React.Component { // LikeButton 컴포넌트
 ## 참조사이트
 - [바벨 브라우져 옵션 참고사이트](https://github.com/browserslist/browserslist)
 - [useRef 언제 사용하는가?](https://yoonjong-park.tistory.com/entry/React-useRef-%EB%8A%94-%EC%96%B8%EC%A0%9C-%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94%EA%B0%80)
+- [React Hooks :: useReducer에 대해 알아보기](https://velog.io/@iamhayoung/React-Hooks-useReducer%EC%97%90-%EB%8C%80%ED%95%B4-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0)
 
 ## 기타 TIP
 - npm clean
