@@ -1,14 +1,22 @@
-import React, {useState, useReducer, useContext} from "react";
+import React, {useState, useReducer, useContext, useCallback} from "react";
 import Table from "./Table";
+import {re} from "@babel/core/lib/vendor/import-meta-resolve";
 
 
 const initialState = {
     winner: '',
     turn: 'O',
-    tableData: [['', '', ''], ['', '', ''], ['', '', '']],
+    tableData: [
+        ['', '', ''],
+        ['', '', ''],
+        ['', '', '']
+    ],
 };
 
-const SET_WINNER = 'SET_WINNER';
+export const SET_WINNER = 'SET_WINNER';
+export const CLICK_CELL = 'CLICK_CELL';
+export const CHANGE_TURN = 'CHANGE_TURN';
+
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -17,6 +25,21 @@ const reducer = (state, action) => {
                 ...state,
                 winner: action.winner,
             }
+        case CLICK_CELL: {
+            const tableData = [...state.tableData];
+            tableData[action.row] = [...tableData[action.row]]; // immer라는 라이브러리로 가독성 해결
+            tableData[action.row][action.cell] = state.turn;
+            return {
+                ...state,
+                tableData
+            };
+        }
+        case CHANGE_TURN: {
+            return {
+                ...state,
+                turn: state.turn === 'O' ? 'X' : 'O',
+            };
+        }
     }
 }
 
@@ -27,14 +50,14 @@ const TictacToe = () => {
     // const [turn, setTurn] = useState('O');
     // const [tableData, setTableData] = useState([['', '', ''], ['', '', ''], ['', '', '']]);
 
-    const onClickTable = useContext(() => {
-        dispatch({ type: SET_WINNER, winner: 'O' })
+    const onClickTable = useCallback(() => {
+        dispatch({ type: SET_WINNER, winner: 'O' });
     }, []);
 
     return (
         <>
-            <Table onClick={onClickTable} tableData={state.tableData}/>
-            {state.winnner && <div>{state.winner}님의 승리</div>}
+            <Table onClick={onClickTable} tableData={state.tableData} dispatch={dispatch()}/>
+            {state.winner && <div>{state.winner}님의 승리</div>}
         </>
     )
 };
