@@ -203,6 +203,18 @@ class LikeButton extends React.Component { // LikeButton 컴포넌트
             } 
             const [redo, setRedo] = useState(false);
     - useEffect, useCallback, useMemo 안에서 useState 를 사용한면 안된다.
+    - 리액트는 비동기이다. 리덕스의 경우 동기라서 헷갈리지 마라.
+        - 따라서 리액트에서 state 는 비동기이고, 비동기인 state 에서 뭔가를 처리 하려면 useEffect 를 사용해야 한다.
+        - 코드예
+            const onClickTd = useCallback(() => {
+                console.log(rowIndex, cellIndex);
+                if (cellData) {
+                    return;
+                }
+                dispatch({ type: CLICK_CELL, row: rowIndex, cell: cellIndex});
+                dispatch({ type: CHANGE_TURN });
+                state.turn; // 비동기라 이전 turn 값이 찍힌다. 위에 CHANGE_TURN 이 있음에도.
+            }, [cellData]);
 
 ## 참조사이트
 - [바벨 브라우져 옵션 참고사이트](https://github.com/browserslist/browserslist)
