@@ -114,7 +114,8 @@ class LikeButton extends React.Component { // LikeButton 컴포넌트
            // ajax
         }, []); // 빈배열로 주면 componentDidMount 에서만 실행
     - useReducer는 useState처럼 State를 관리하고 업데이트 할 수 있는 Hook  이다.
-    
+    - 부모과 자식 관계의 컴포넌트에 있어서 그 깊이가 깊을때, 부모-> 자식 -> 자식 -> 자식...일때 props 를 넘길때 복잡하다.
+        - 이때 Context API를 사용한다.
 
 ## 주의상항.
     - 리액트는 array에 push 사용하면 안됨.
