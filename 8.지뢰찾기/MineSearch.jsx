@@ -79,6 +79,39 @@ const reducer = (state, action) => {
             const tableData = [...state.tableData];
             tableData[action.row] = [...state.tableData[action.row]];
             tableData[action.row][action.cell] = CODE.OPENED;
+
+            let around = [];
+            if (tableData[action.row -1]) {
+                if (tableData[action.cell -1]) {
+                    around.concat(tableData[action.row -1][action.cell -1]);
+                }
+                around.concat(tableData[action.row -1][action.cell]);
+                if (tableData[action.cell +1]) {
+                    around.concat(tableData[action.row -1][action.cell +1]);
+                }
+            }
+
+            if (tableData[action.cell -1]) {
+                around.concat(tableData[action.row][action.cell - 1]);
+            }
+            if (tableData[action.cell +1]) {
+                around.concat(tableData[action.row][action.cell] + 1);
+            }
+
+            if (tableData[action.row +1]) {
+                if (tableData[action.cell -1]) {
+                    around.concat(tableData[action.row +1][action.cell -1]);
+                }
+
+                around.concat(tableData[action.row +1][action.cell]);
+                if (tableData[action.cell +1]) {
+                    around.concat(tableData[action.row +1][action.cell +1]);
+                }
+            }
+
+            const count = around.filter((v) => [CODE.MINE, CODE.FLAG_MINE, CODE.QUESTION_MINE].includes(v)).length;
+            console.log(around, count);
+            tableData[action.row][action.cell] = count;
             return {
                 ...state,
                 tableData,
