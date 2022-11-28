@@ -77,37 +77,41 @@ const reducer = (state, action) => {
             }
         case OPEN_CELL: {
             const tableData = [...state.tableData];
-            tableData[action.row] = [...state.tableData[action.row]];
-            tableData[action.row][action.cell] = CODE.OPENED;
+            tableData.forEach((row, i) => {
+               tableData[i] = [...state.tableData[i]];
+            });
 
-            let around = [];
-            if (tableData[action.row -1]) {
-                if (tableData[action.cell -1]) {
-                    around.concat(tableData[action.row -1][action.cell -1]);
+            const checked = [];
+            const checkAround = (row, cell) => {
+                if ([CODE.OPENED, CODE.FLAG_MINE, CODE.FLAG, CODE.QUESTION_MINE, CODE.QUESTION].includes(tableData[row][cell])) {
+                    return
                 }
-                around.concat(tableData[action.row -1][action.cell]);
-                if (tableData[action.cell +1]) {
-                    around.concat(tableData[action.row -1][action.cell +1]);
+                if (row < 0 || row > tableData.length || cell < 0 || cell > tableData[0].length) {
+                    return;
+                }
+                if (checked.includes(row + ',' + cell)) {
+                    return;
+                } else {
+                    checked.push(row + ',' + cell);
+                }
+
+                let around = [];
+                if (tableData[row -1]) {
+                    around.concat(tableData[row -1][cell -1]);
+                    around.concat(tableData[row -1][cell]);
+                    around.concat(tableData[row -1][cell +1]);
+                }
+
+                around.concat(tableData[row][cell - 1]);
+                around.concat(tableData[row][cell] + 1);
+
+                if (tableData[row +1]) {
+                    around.concat(tableData[row +1][cell -1]);
+                    around.concat(tableData[row +1][cell]);
+                    around.concat(tableData[row +1][cell +1]);
                 }
             }
 
-            if (tableData[action.cell -1]) {
-                around.concat(tableData[action.row][action.cell - 1]);
-            }
-            if (tableData[action.cell +1]) {
-                around.concat(tableData[action.row][action.cell] + 1);
-            }
-
-            if (tableData[action.row +1]) {
-                if (tableData[action.cell -1]) {
-                    around.concat(tableData[action.row +1][action.cell -1]);
-                }
-
-                around.concat(tableData[action.row +1][action.cell]);
-                if (tableData[action.cell +1]) {
-                    around.concat(tableData[action.row +1][action.cell +1]);
-                }
-            }
 
             const count = around.filter((v) => [CODE.MINE, CODE.FLAG_MINE, CODE.QUESTION_MINE].includes(v)).length;
             console.log(around, count);
