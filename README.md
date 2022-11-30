@@ -216,6 +216,7 @@ class LikeButton extends React.Component { // LikeButton 컴포넌트
                 dispatch({ type: CHANGE_TURN });
                 state.turn; // 비동기라 이전 turn 값이 찍힌다. 위에 CHANGE_TURN 이 있음에도.
             }, [cellData]);
+    - 하위 컴포넌트도 모두 useMemo 가 되어 있어야 상위 컴포넌트도 useMemo 가 적용 가능하다.
 
 ## 참조사이트
 - [바벨 브라우져 옵션 참고사이트](https://github.com/browserslist/browserslist)
