@@ -116,6 +116,30 @@ class LikeButton extends React.Component { // LikeButton 컴포넌트
     - useReducer는 useState처럼 State를 관리하고 업데이트 할 수 있는 Hook  이다.
     - 부모과 자식 관계의 컴포넌트에 있어서 그 깊이가 깊을때, 부모-> 자식 -> 자식 -> 자식...일때 props 를 넘길때 복잡하다.
         - 이때 Context API를 사용한다.
+    - 기본적으로 useEffect 를 사용하고, 혹시나 state 값 변경으로 인해 화면 깜빡임이 발생 할때, useLayoutEffect 를 사용하면 된다.
+        뚀는 간발의 차이로 랜더링 되는것 같다고 할때 사용하면 된다.
+    - useTransition 은 천천히 보여줘도 되는 것들을 할때 사용.
+        예를들어 input 에 어떤 결과를 넣고 검색한다고 할때, input 은 결과가 바로 나와야 하니 제외하고, 결과는 useTransition을 사용한다. 
+        코드예
+        const [result, setResult] = useState("");
+        const [name, setName] = useState("");
+        const [loading, startTransition] = useTransition(); // loading 을 제공하므로 여기에 로딩이미지나, 글자를 표기하면 된다. 아래 return 문 의 loading 참조
+
+        const onChange = useCallback((e) => {
+            setName(e.target.value);
+            startTransition(() => {
+                setResult(e.target.value + "의 결과");
+            });
+        }, []);
+        
+        return (
+            <div>
+                {loading ? <div>로딩중...</div> : null} // useTransition 이 로딩 중일때.
+                <input value={name} onChnage={onChange} />
+                {result}
+            </div>
+        )
+    - useDeferredValue 도 useTransition 과 비슷하다. 이것을 사용하면 중요하지 않는값으로 리액트가 판단을 하여, 성능에 영향이 없을때 표시글 해 준다.
 
 ## 주의상항.
     - 리액트는 array에 push 사용하면 안됨.
